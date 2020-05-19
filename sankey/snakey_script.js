@@ -5,7 +5,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     //width = 700 - margin.left - margin.right,
     //height = 300 - margin.top - margin.bottom;
     width = 700 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 
 // format variables
@@ -24,7 +24,7 @@ var svg = d3.select("body").append("svg")
 // Set the sankey diagram properties
 var sankey = d3.sankey()
     .nodeWidth(36)
-    .nodePadding(40)
+    .nodePadding(10)
     .size([width, height]); //一整個畫圖區域大小
 
 var path = sankey.link();
