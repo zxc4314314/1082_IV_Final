@@ -177,23 +177,24 @@ var color = d3.scaleQuantize()
 });*/
 
 file = "./final.csv"
+// file = "./t.csv"
 d3.csv(file, function(data){
-    let margin = {top: 500, right: 20, bottom: 40, left: 500},
-        width = 1*(window.screen.width) - margin.left - margin.right,
-        height = 1*(window.screen.height) + margin.top - margin.bottom;
+    let margin = {top: 50, right: 50, bottom: 50, left: 50},
+        width = 1*(window.screen.width), //- margin.left - margin.right,
+        height = 1*(window.screen.height); //+ margin.top - margin.bottom;
 
-
-    let maxRadius = 50,
+    let maxRadius = height*0.1,
         padding = 1.5,
-        clusterPadding = 6,
-        clusters = new Array(5);
+        clusterPadding = 10,
+        n = 218,
+        clusters = new Array(7);
 
     let svg = d3.select("#svg").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + 30 + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("width", width)
+        .attr("height", height )
+        .append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        // .attr("transform",
+        //     "translate(" + margin.left + "," + margin.top + ")");
 
     let div = d3.select("#svg").append("div")
         .attr("class", "tooltip")
@@ -202,8 +203,8 @@ d3.csv(file, function(data){
 
     let radiusScale = d3.scaleLinear()
         .domain(d3.extent(data, function(d) { return +d.valence;} ))
-        .range([1, 50]);
-        // .range(d3.extent(data, function(d) { return (+d.valence)*5;} ));
+        // .range([1, 50]);
+        .range(d3.extent(data, function(d) { return (+d.valence)*5;} ));
 
 
     console.log(d3.extent(data, function(d) { return +d.valence;}));
@@ -211,7 +212,7 @@ d3.csv(file, function(data){
     let nodes = data.map((d) => {
         // scale radius to fit on the screen
         let scaledRadius  = radiusScale(+d.valence),
-            group = +d.C5_Modal;
+            group = +d.C7_Modal;
 
         // add cluster id and radius to array
         d = {
@@ -259,11 +260,12 @@ d3.csv(file, function(data){
 
     // create the clustering/collision force simulation
     let simulation = d3.forceSimulation(nodes)
-        .velocityDecay(0.2)
+        .velocityDecay(1)
         .force("x", d3.forceX().strength(.0005))
         .force("y", d3.forceY().strength(.0005))
         .force("collide", collide)
         .force("cluster", clustering)
+
         .on("tick", ticked);
 
     function ticked() {
@@ -309,6 +311,7 @@ d3.csv(file, function(data){
         });
     }
 
+
     function collide(alpha) {
         var quadtree = d3.quadtree()
             .x((d) => d.x)
@@ -321,8 +324,10 @@ d3.csv(file, function(data){
                 nx2 = d.x + r,
                 ny1 = d.y - r,
                 ny2 = d.y + r;
-            quadtree.visit(function(quad, x1, y1, x2, y2) {
 
+            // console.log(nx1);
+
+            quadtree.visit(function(quad, x1, y1, x2, y2){
                 if (quad.data && (quad.data !== d)) {
                     var x = d.x - quad.data.x,
                         y = d.y - quad.data.y,
