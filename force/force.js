@@ -8,7 +8,7 @@ var color = d3.scaleQuantize()
     .domain([0,5])
     .range(["#fff", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598"]);
 
-d3.json(file).then(function(data){
+/*d3.json(file).then(function(data){
     let margin = {top: 300, right: 20, bottom: 40, left: 850},
         width = 1*(window.screen.width) - margin.left - margin.right,
         height = 1*(window.screen.height) + margin.top - margin.bottom;
@@ -86,10 +86,10 @@ d3.json(file).then(function(data){
             .on("drag", dragged)
             .on("end", dragended);
     }
-});
+});*/
 
 
-d3.json(file).then(function(Data){
+/*d3.json(file).then(function(Data){
     let margin = {top: 30, right: 0, bottom: 40, left: 0},
         width = 1*(window.screen.width) - margin.left - margin.right,
         height = 1*(window.screen.height) + margin.top - margin.bottom;
@@ -174,4 +174,172 @@ d3.json(file).then(function(Data){
         d.fx = null;
         d.fy = null;
     }
+});*/
+
+file = "./final.csv"
+d3.csv(file, function(data){
+    let margin = {top: 500, right: 20, bottom: 40, left: 500},
+        width = 1*(window.screen.width) - margin.left - margin.right,
+        height = 1*(window.screen.height) + margin.top - margin.bottom;
+
+
+    let maxRadius = 50,
+        padding = 1.5,
+        clusterPadding = 6,
+        clusters = new Array(5);
+
+    let svg = d3.select("#svg").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + 30 + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    let div = d3.select("#svg").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+
+    let radiusScale = d3.scaleLinear()
+        .domain(d3.extent(data, function(d) { return +d.valence;} ))
+        .range([1, 50]);
+        // .range(d3.extent(data, function(d) { return (+d.valence)*5;} ));
+
+
+    console.log(d3.extent(data, function(d) { return +d.valence;}));
+
+    let nodes = data.map((d) => {
+        // scale radius to fit on the screen
+        let scaledRadius  = radiusScale(+d.valence),
+            group = +d.C5_Modal;
+
+        // add cluster id and radius to array
+        d = {
+            cluster     : group,
+            r           : scaledRadius,
+            term        : d.Term,
+            valence     : d.valence
+            // major_cat   : d.Major_category
+        };
+        // add to clusters array if it doesn't exist or the radius is larger than another radius in the cluster
+        if (!clusters[group] || (scaledRadius > clusters[group].r)) clusters[group] = d;
+
+        return d;
+    });
+
+
+
+    let circles = svg.append('g')
+        .datum(nodes)
+        .selectAll('.circle')
+        .data(d => d)
+        .enter().append('circle')
+        .attr('r', (d) => d.r)
+        .attr('fill', (d) => color(d.cluster))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1)
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended))
+    // add tooltips to each circle
+        .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div .html(d.term + " " + d.valence)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
+
+    // create the clustering/collision force simulation
+    let simulation = d3.forceSimulation(nodes)
+        .velocityDecay(0.2)
+        .force("x", d3.forceX().strength(.0005))
+        .force("y", d3.forceY().strength(.0005))
+        .force("collide", collide)
+        .force("cluster", clustering)
+        .on("tick", ticked);
+
+    function ticked() {
+        circles
+            .attr('cx', (d) => d.x)
+            .attr('cy', (d) => d.y);
+    }
+
+    // Drag functions used for interactivity
+    function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+
+    // These are implementations of the custom forces.
+    function clustering(alpha) {
+        nodes.forEach(function(d) {
+            var cluster = clusters[d.cluster];
+            if (cluster === d) return;
+            var x = d.x - cluster.x,
+                y = d.y - cluster.y,
+                l = Math.sqrt(x * x + y * y),
+                r = d.r + cluster.r;
+            if (l !== r) {
+                l = (l - r) / l * alpha;
+                d.x -= x *= l;
+                d.y -= y *= l;
+                cluster.x += x;
+                cluster.y += y;
+            }
+        });
+    }
+
+    function collide(alpha) {
+        var quadtree = d3.quadtree()
+            .x((d) => d.x)
+            .y((d) => d.y)
+            .addAll(nodes);
+
+        nodes.forEach(function(d) {
+            var r = d.r + maxRadius + Math.max(padding, clusterPadding),
+                nx1 = d.x - r,
+                nx2 = d.x + r,
+                ny1 = d.y - r,
+                ny2 = d.y + r;
+            quadtree.visit(function(quad, x1, y1, x2, y2) {
+
+                if (quad.data && (quad.data !== d)) {
+                    var x = d.x - quad.data.x,
+                        y = d.y - quad.data.y,
+                        l = Math.sqrt(x * x + y * y),
+                        r = d.r + quad.data.r + (d.cluster === quad.data.cluster ? padding : clusterPadding);
+                    if (l < r) {
+                        l = (l - r) / l * alpha;
+                        d.x -= x *= l;
+                        d.y -= y *= l;
+                        quad.data.x += x;
+                        quad.data.y += y;
+                    }
+                }
+                return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+            });
+        });
+    }
+
+
 });
