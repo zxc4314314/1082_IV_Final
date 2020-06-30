@@ -73,6 +73,7 @@ Main Components
 }
 .cd-section:nth-of-type(2) > div {
   background-color: #2e5367;
+  line-height: 100vh;
 }
 [data-animation="parallax"] .cd-section > div, [data-animation="fixed"] .cd-section > div, [data-animation="opacity"] .cd-section > div {
   background-position: center center;

@@ -8,20 +8,26 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+    <link rel="stylesheet" type="text/css" href="./sankey_style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./sankey.js"></script>
 
 </head>
 <body data-hijacking="on" data-animation="none">
+    <!-- <body> -->
     <section class="cd-section visible">
         <div>
             <h1 class="title">情緒詞：關聯與分群</h1>
         </div>
     </section>
 
-
     <section class="cd-section">
-        <div>
-            <h2>Section 5</h2>
-        </div>
+            <div>
+                <div id="sankey_container">
+                    <div id="sankey_diagram">
+                        <script type="text/javascript" src="./sankey_script.js"></script>
+                    </div>
+                </div>
     </section>
 
     <nav>
