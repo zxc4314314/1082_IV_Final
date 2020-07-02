@@ -149,12 +149,12 @@ d3.csv(file, function(data){
         .on('click', function () {
 
             // Remove active class from all buttons
-            d3.selectAll('.group').classed('active', false);
+            // d3.selectAll('.group').classed('active', false);
             // Find the button just clicked
             var group = d3.select(this);
 
             // Set it as the active button
-            group.classed('active', true);
+            // group.classed('active', true);
 
             // Get the id of the button
             var modal_group = group.attr('id');
@@ -169,11 +169,11 @@ d3.csv(file, function(data){
 
     d3.selectAll('.dimension')
         .on('click', function(){
-            d3.selectAll('.dimension').classed('active', false);
+            // d3.selectAll('.dimension').classed('active', false);
 
             var dimension = d3.select(this);
 
-            dimension.classed('active', true);
+            // dimension.classed('active', true);
             
             var Dimension = dimension.attr('id');
 

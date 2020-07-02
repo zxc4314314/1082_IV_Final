@@ -1,10 +1,11 @@
 .switch {
   position: relative;
   width: 480px;
-  padding: 0 1rem;
+  
+  /* padding: 0 1px; */
 }
 .switch:before {
-  content: "  ";
+  content: " ";
   position: absolute;
   left: 0;
   z-index: -1;
@@ -16,8 +17,11 @@
 .switch__label {
   color: #999;
   display: inline-block;
-  width: 125px;
-  padding: 1rem;
+  width: 158px;
+  height:  50px;
+ line-height:50px;
+   margin: auto;
+  padding: 0;
   text-align: center;
   cursor: pointer;
   -webkit-transition: color 200ms ease-out;
@@ -27,7 +31,7 @@
   color: white;
 }
 .switch__indicator {
-  width: 180px;
+  width: 160px;
   height: 50px;
   position: absolute;
   top: 0px;
@@ -44,12 +48,12 @@
           transform: translate3d(0px, 0, 0);
 }
 .switch input#C6_Modal:checked ~ .switch__indicator {
-  -webkit-transform: translate3d(166px, 0, 0);
-          transform: translate3d(166px, 0, 0);
+  -webkit-transform: translate3d(160px, 0, 0);
+          transform: translate3d(160px, 0, 0);
 }
 .switch input#C7_Modal:checked ~ .switch__indicator {
-  -webkit-transform: translate3d(332px, 0, 0);
-          transform: translate3d(332px, 0, 0);
+  -webkit-transform: translate3d(320px, 0, 0);
+          transform: translate3d(320px, 0, 0);
 }
 .switch input[type="radio"]:not(:checked), .switch input[type="radio"]:checked {
   display: none;
