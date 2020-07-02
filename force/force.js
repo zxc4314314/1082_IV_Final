@@ -5,7 +5,7 @@ var c5_color = d3.scaleQuantize()
 
 var color = d3.scaleQuantize()
     .domain([0,5])
-    .range(["#040", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598"]);
+    .range(["#040", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", "#2c6785", "#ffee9c", "#6b6f8a"]);
 
 var temp;
 
