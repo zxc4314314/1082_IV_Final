@@ -4,13 +4,45 @@
         <meta charset="UTF-8">
         <title></title>
         <link rel="stylesheet" href="./css/index.css">
-        
+
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
         <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
         <link rel="stylesheet" type="text/css" href="./sankey_style.css">
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="./sankey.js"></script>
+        <style>
+.selected {
+    fill: none;
+}
+
+    .button {
+        min-width: 130px;
+        padding: 4px 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 13px;
+        border: 1px solid #e0e0e0;
+        text-decoration: none;
+    }
+
+    .button.active {
+        background: #000;
+        color: #fff;
+    }
+    .tooltip {
+        position: absolute;
+        text-align: center;
+        width: 150px;
+        /*height: 28px;         */
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightgrey;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+        </style>
     </head>
     <!-- <body data-hijacking="on" data-animation="none"> -->
     <body>
@@ -24,20 +56,32 @@
         </section>
         <section>
             <div class="article">                
-            <p>
-            使用力圖 (force graph) 呈現分群資料，可在圖表中選擇分群數目以及不同向度結果，越大的節點 (node)表示該向度評分越高。向度資料由受試者對每個情緒詞的不同向度進行九點評分，並將所有受試者各項度的評分取平均數。受試者數量為353名，男女比為13比7，平均年齡21.54歲。
-            </p>
+                <p>
+                使用力圖 (force graph) 呈現分群資料，可在圖表中選擇分群數目以及不同向度結果，越大的節點 (node)表示該向度評分越高。向度資料由受試者對每個情緒詞的不同向度進行九點評分，並將所有受試者各項度的評分取平均數。受試者數量為353名，男女比為13比7，平均年齡21.54歲。
+                </p>
             </div>
         </section>
         <section>
-            <image src="#" style="height: 300px">
+            <div id="toolbar">
+                <button id="C5_Modal" class="button group">By C5 Modal</button>
+                <button id="C6_Modal" class="button group">By C6 Modal</button>
+                <button id="C7_Modal" class="button group">By C7 Modal</button>
+                <button id="valence" class="button dimension">valence</button>
+                <button id="arousal" class="button dimension">arousal</button>
+                <button id="continuance" class="button dimension">continuance</button>
+                <button id="dominance" class="button dimension">dominance</button>
+                <button id="frequency" class="button dimension">frequency</button>
+                <button id="typicality" class="button dimension">typicality</button>
+            </div>
+            <div id="svg"></div>
+
         </section>
         <section>
             <div class="article">                
-            <p>
+                <p>
                 使用桑基圖（sankey diagram）呈現分群資料。每一個直欄表示一組分群結果，由左而右分別是分成五、六、七群三組。一直欄上的每個節點（node），表示該組分群結果中的各個子群。兩個節點間的路徑（link）表示有多少情緒詞在兩個子群中是一致的，路徑寬度越寬表示一致的情緒詞越多，因此可以推廣到整體路徑越平行，表示不同組分群結果較穩定，反之越多交叉，不同組分群結果較不穩定。
-            </p>
-        </div>
+                </p>
+            </div>
         </section>
         <section>
             <!-- <section class="cd-section"> -->
@@ -45,7 +89,7 @@
                 <div style="width:50%; float: left;">
                     <div id="sankey_diagram">
                         <script type="text/javascript" src="./sankey_script.js"></script>
-                    <p>點擊滑鼠或路徑，即可看出分群結果中以及分群流向中的情緒詞。</p>
+                        <p>點擊滑鼠或路徑，即可看出分群結果中以及分群流向中的情緒詞。</p>
                     </div>
                 </div>
                 <div style="width:15%; float: left">
@@ -59,16 +103,17 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <nav>
-            <ul class="cd-vertical-nav">
-                <li><a href="#0" class="cd-prev inactive">Next</a></li>
-                <li><a href="#0" class="cd-next">Prev</a></li>
-            </ul>
+            </section>
+            <nav>
+                <ul class="cd-vertical-nav">
+                    <li><a href="#0" class="cd-prev inactive">Next</a></li>
+                    <li><a href="#0" class="cd-next">Prev</a></li>
+                </ul>
             </nav> <!-- .cd-vertical-nav -->
             <script src="js/jquery-2.1.4.js"></script>
             <script src="js/velocity.min.js"></script>
             <script src="js/velocity.ui.min.js"></script>
             <script src="js/main.js"></script> <!-- Resource jQuery -->
-        </body>
-    </html>
+            <script src="./force.js"></script>
+    </body>
+</html>
