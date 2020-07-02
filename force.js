@@ -1,10 +1,10 @@
 var color = d3.scaleQuantize()
     .domain([0,7])
-    .range(["#000", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", "#2c6785", "#ffee9c", "#6b6f8a"]);
+    .range(["#66ffc2", "#ff7f4d", "#3bd1ff", "#7cff68", "#ffe141", "#ff4242", "#b952ff", "#3958ff"]);
 
 file = "./final.csv"
 
-var margin = {top: 50, right: 50, bottom: 50, left: 50},
+var margin = {top: 50, right: 100, bottom: 50, left: 100},
     w = 1*(window.screen.width), //- margin.left - margin.right,
     h = 1*(window.screen.height); //+ margin.top - margin.bottom;
 
@@ -12,7 +12,7 @@ var radius = 8;
 // var color = d3.scaleOrdinal(d3.schemeCategory20);
 var centerScale = d3.scalePoint().padding(1).range([margin.left, w-margin.right]);
 var textScale = d3.scalePoint().padding(1).range([0, w]);
-var forceStrength = 0.1;
+var forceStrength = 0.075;
 
 d3.csv(file, function(data){
     var svg = d3.select("#svg_bubbles").append("svg")
@@ -37,7 +37,7 @@ d3.csv(file, function(data){
     var circles = svg.selectAll("circle")
         .data(data, function(d){ return d.ID ;});
 
-    var div = d3.select("#svg").append("div")
+    var div = d3.select("#svg_bubbles").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
@@ -46,8 +46,8 @@ d3.csv(file, function(data){
         .attr("r", function(d, i){ return d.r; })
         .attr("cx", function(d, i){ return 175 + 25 * i + 2 * i ** 2; })
         .attr("cy", function(d, i){ return 0; })
-        .style("fill", "none")
-        .style("stroke", function(d, i){ return color(0); })
+        // .style("fill", "none")
+        .style("fill", function(d, i){ return color(0); })
         .style("stroke-width", 1)
         .style("pointer-events", "all")
         .call(d3.drag()
@@ -57,7 +57,7 @@ d3.csv(file, function(data){
         .on("mouseover", function(d) {
             div.transition()
                 .duration(200)
-                .style("opacity", .9);
+                .style("opacity", 1);
             div .html(d.Term)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
@@ -96,9 +96,6 @@ d3.csv(file, function(data){
         if (!d3.event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
-        var me = d3.select(this)
-        console.log(me.classed("selected"))
-        me.classed("selected", !me.classed("selected"))
     } 
 
     function splitBubbles(Group) {
@@ -108,16 +105,12 @@ d3.csv(file, function(data){
 
         // console.log(data.map(function(d){ return d[Group]; }));
 
-        showTitles(Group, textScale);
         d3.selectAll("circle")
             .transition()
-            .duration(3000)
+            .duration(1000)
             .style("fill", function(d){ return color(d[Group]);})
-            .style("stroke-width", 0)
-
-        a =  function(d, i){ return color(+(d[Group])); }
-
-        console.log()
+        
+        showTitles(Group, textScale);
 
         // @v4 Reset the 'x' force to draw the bubbles to their year centers
         simulation.force('x', d3.forceX().strength(forceStrength).x(function(d){ 
@@ -129,19 +122,19 @@ d3.csv(file, function(data){
     }
 
     function hideTitles() {
-        svg.selectAll('.title').remove();
+        svg.selectAll('.group_title').remove();
     }
 
     function showTitles(Group, scale) {
         // Another way to do this would be to create
         // the year texts once and then just hide them.
-        var titles = svg.selectAll('.title')
+        var titles = svg.selectAll('.group_title')
             .data(scale.domain());
 
         console.log((scale(1)));
 
         titles.enter().append('text')
-            .attr('class', 'title')
+            .attr('class', 'group_title')
             .merge(titles)
             .attr('x', function (d) { return scale(d); })
             .attr('y', 40)

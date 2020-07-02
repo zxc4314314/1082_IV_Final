@@ -9,41 +9,11 @@
         <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
         <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
         <link rel="stylesheet" type="text/css" href="./sankey_style.css">
-        <link rel="stylesheet" href="./bubbles.css">
+        <link rel="stylesheet" href="./bubble.css">
+        <link rel="stylesheet" href="./button.css">
+        <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'></link>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="./sankey.js"></script>
-        <style>
-.selected {
-    fill: none;
-}
-
-    .button {
-        min-width: 130px;
-        padding: 4px 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 13px;
-        border: 1px solid #e0e0e0;
-        text-decoration: none;
-    }
-
-    .button.active {
-        background: #000;
-        color: #fff;
-    }
-    .tooltip {
-        position: absolute;
-        text-align: center;
-        width: 150px;
-        /*height: 28px;         */
-        padding: 2px;
-        font: 12px sans-serif;
-        background: lightgrey;
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-        </style>
     </head>
     <!-- <body data-hijacking="on" data-animation="none"> -->
     <body>
@@ -62,18 +32,31 @@
                 </p>
             </div>
         </section>
+        
+        <div class="switch">
+            <input name="switch" id="C5_Modal" type="radio" checked/>
+            <label for="C5_Modal" class="switch__label">C5 modal</label>
+            <input name="switch" id="C6_Modal" type="radio" />
+            <label for="C6_Modal" class="switch__label">C6 modal</label>
+            <input name="switch" id="C7_Modal" type="radio" />
+            <label for="C7_Modal" class="switch__label" >C7 modal</label>
+            <div class="switch__indicator" /></div>
+        </div>
+
+        <form>
+            <input class="chosen-value" type="text" value="" placeholder="Type to filter">
+            <ul class="value-list">
+                <li id="valence" class="dimension">Valence</li>
+                <li id="arousal" class="dimension">Arousal</li>
+                <li id="continuance" class="dimension">Continuance</li>
+                <li id="dominance" class="dimension">Dominance</li>
+                <li id="frequency" class="dimension">Frequency</li>
+                <li id="typicality" class="dimension">Typicality</li>
+            </ul>
+        </form>
+
         <section>
-            <div id="toolbar">
-                <button id="C5_Modal" class="button group">By C5 Modal</button>
-                <button id="C6_Modal" class="button group">By C6 Modal</button>
-                <button id="C7_Modal" class="button group">By C7 Modal</button>
-                <button id="valence" class="button dimension">valence</button>
-                <button id="arousal" class="button dimension">arousal</button>
-                <button id="continuance" class="button dimension">continuance</button>
-                <button id="dominance" class="button dimension">dominance</button>
-                <button id="frequency" class="button dimension">frequency</button>
-                <button id="typicality" class="button dimension">typicality</button>
-            </div>
+
             <div id="svg_bubbles"></div>
 
         </section>
@@ -111,10 +94,12 @@
                     <li><a href="#0" class="cd-next">Prev</a></li>
                 </ul>
             </nav> <!-- .cd-vertical-nav -->
-            <script src="js/jquery-2.1.4.js"></script>
+            <!-- <script src="js/jquery-2.1.4.js"></script> -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="js/velocity.min.js"></script>
             <script src="js/velocity.ui.min.js"></script>
             <script src="js/main.js"></script> <!-- Resource jQuery -->
             <script src="./force.js"></script>
+            <script src="./button.js"></script>
     </body>
 </html>
