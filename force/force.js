@@ -5,7 +5,7 @@ var c5_color = d3.scaleQuantize()
 
 var color = d3.scaleQuantize()
     .domain([0,5])
-    .range(["#040", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", "#2c6785", "#ffee9c", "#6b6f8a"]);
+    .range(["#000", "#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", "#2c6785", "#ffee9c", "#6b6f8a"]);
 
 var temp;
 
@@ -218,10 +218,7 @@ var simulation = d3.forceSimulation()
     .force("y", d3.forceY().y(h / 2))
     .force("x", d3.forceX().x(w / 2))
 
-
-
 d3.csv(file, function(data){
-
     Dimension = "valence";
     Group = "C5_Modal";
 
@@ -240,9 +237,9 @@ d3.csv(file, function(data){
         .attr("r", function(d, i){ return d.r; })
         .attr("cx", function(d, i){ return 175 + 25 * i + 2 * i ** 2; })
         .attr("cy", function(d, i){ return 250; })
-        .style("fill", function(d, i){ return color(0);})
-        // .style("stroke", function(d, i){ return color(d[Group]); })
-        // .style("stroke-width", 0)
+        .style("fill", "none")
+        .style("stroke", function(d, i){ return color(0); })
+        .style("stroke-width", 1)
         .style("pointer-events", "all")
         .call(d3.drag()
             .on("start", dragstarted)
@@ -282,13 +279,6 @@ d3.csv(file, function(data){
         var me = d3.select(this)
         console.log(me.classed("selected"))
         me.classed("selected", !me.classed("selected"))
-
-         Group = "C6_Modal";
-
-
-        // d3.selectAll("circle.selected")
-        //     .style("fill", "none")
-
     } 
 
     function groupBubbles() {
@@ -309,13 +299,16 @@ d3.csv(file, function(data){
             hideTitles()
             d3.selectAll("circle")
                 .transition()
-                .style("fill", function(d, i){ return color(0); })
+                .style("fill", "none")
+                .style("stroke", function(d, i){ return color(0); })
+                .style("stroke-width", 1)
         } else {
             showTitles(Group, centerScale);
             d3.selectAll("circle")
                 .transition()
                 .duration(3000)
                 .style("fill", function(d, i){ return color(d[Group]); })
+                .style("stroke-width", 0)
         }
 
         // @v4 Reset the 'x' force to draw the bubbles to their year centers
