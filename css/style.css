@@ -12,10 +12,9 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
-  font-family: "Open Sans", sans-serif;
+  font-family: "微軟正黑體", sans-serif;
   color: #ffffff;
-  background-color: #22283f;
+  background-color: #313131;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
