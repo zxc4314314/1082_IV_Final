@@ -356,11 +356,16 @@ d3.csv(file, function(data){
 
                 // Get the id of the button
                 var buttonId = button.attr('id');
+                var buttonClass = button.attr("class");
 
-                console.log(buttonId)
+                if(buttonClass.search("modal")>0)
+                {
+                    console.log(buttonClass.search("modal"));
+                    console.log(buttonClass);
+                    splitBubbles(buttonId);
+                }
                 // Toggle the bubble chart based on
                 // the currently clicked button.
-                splitBubbles(buttonId);
             });
     }
 
