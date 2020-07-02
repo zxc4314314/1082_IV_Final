@@ -201,7 +201,7 @@ var margin = {top: 50, right: 50, bottom: 50, left: 50},
     w = 1*(window.screen.width), //- margin.left - margin.right,
     h = 1*(window.screen.height); //+ margin.top - margin.bottom;
 
-var radius = 25;
+var radius = 15;
 // var color = d3.scaleOrdinal(d3.schemeCategory20);
 var centerScale = d3.scalePoint().padding(1).range([0, w]);
 var forceStrength = 0.05;
@@ -223,7 +223,8 @@ d3.csv(file, function(data){
     Group = "C5_Modal";
 
     data.forEach(function(d){
-        d.r = d[Dimension]*2;
+        // d.r = d[Dimension]*2;
+        d.r = radius;
         d.x = w / 2;
         d.y = h / 2;
     })
