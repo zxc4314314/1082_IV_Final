@@ -212,7 +212,7 @@ var svg = d3.select("#svg").append("svg")
 
 var simulation = d3.forceSimulation()
     .force("collide",d3.forceCollide( function(d){
-        return d.r + 8 }).iterations(16) 
+        return d.r + 4 }).iterations(16) 
     )
     .force("charge", d3.forceManyBody())
     .force("y", d3.forceY().y(h / 2))
@@ -240,9 +240,9 @@ d3.csv(file, function(data){
         .attr("r", function(d, i){ return d.r; })
         .attr("cx", function(d, i){ return 175 + 25 * i + 2 * i ** 2; })
         .attr("cy", function(d, i){ return 250; })
-        .style("fill", function(d, i){ return color(d[Group]); })
-        .style("stroke", function(d, i){ return color(d[Group]); })
-        .style("stroke-width", 0)
+        .style("fill", function(d, i){ return color(0);})
+        // .style("stroke", function(d, i){ return color(d[Group]); })
+        // .style("stroke-width", 0)
         .style("pointer-events", "all")
         .call(d3.drag()
             .on("start", dragstarted)
@@ -283,11 +283,11 @@ d3.csv(file, function(data){
         console.log(me.classed("selected"))
         me.classed("selected", !me.classed("selected"))
 
-        d3.selectAll("circle")
-            .style("fill", function(d, i){ return color(d.ID); })
+         Group = "C6_Modal";
 
-        d3.selectAll("circle.selected")
-            .style("fill", "none")
+
+        // d3.selectAll("circle.selected")
+        //     .style("fill", "none")
 
     } 
 
@@ -301,19 +301,26 @@ d3.csv(file, function(data){
         simulation.alpha(1).restart();
     }
 
-    function splitBubbles(byVar) {
+    function splitBubbles(Group) {
 
-        centerScale.domain(data.map(function(d){ return d[byVar]; }));
+        centerScale.domain(data.map(function(d){ return d[Group]; }));
 
-        if(byVar == "all"){
+        if(Group == "all"){
             hideTitles()
+            d3.selectAll("circle")
+                .transition()
+                .style("fill", function(d, i){ return color(0); })
         } else {
-            showTitles(byVar, centerScale);
+            showTitles(Group, centerScale);
+            d3.selectAll("circle")
+                .transition()
+                .duration(3000)
+                .style("fill", function(d, i){ return color(d[Group]); })
         }
 
         // @v4 Reset the 'x' force to draw the bubbles to their year centers
         simulation.force('x', d3.forceX().strength(forceStrength).x(function(d){ 
-            return centerScale(d[byVar]);
+            return centerScale(d[Group]);
         }));
 
         // @v4 We can reset the alpha value and restart the simulation
@@ -324,7 +331,7 @@ d3.csv(file, function(data){
         svg.selectAll('.title').remove();
     }
 
-    function showTitles(byVar, scale) {
+    function showTitles(Group, scale) {
         // Another way to do this would be to create
         // the year texts once and then just hide them.
         var titles = svg.selectAll('.title')
@@ -336,7 +343,7 @@ d3.csv(file, function(data){
             .attr('x', function (d) { return scale(d); })
             .attr('y', 40)
             .attr('text-anchor', 'middle')
-            .text(function (d) { return byVar + ' ' + d; });
+            .text(function (d) { return Group + ' ' + d; });
 
         titles.exit().remove() 
     }
