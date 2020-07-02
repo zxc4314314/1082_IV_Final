@@ -30,14 +30,25 @@
       background: #000;
       color: #fff;
     }
+    .tooltip {
+        position: absolute;
+        text-align: center;
+        width: 150px;
+        /*height: 28px;         */
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightgrey;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
   </style>
 </head>
 <body>
     <div id="toolbar">
-        <button id="all" class="button active">All</button>
-        <button id="C5_Modal" class="button modal">By C5 Modal</button>
-        <button id="C6_Modal" class="button modal">By C6 Modal</button>
-        <button id="C7_Modal" class="button modal">By C7 Modal</button>
+        <button id="C5_Modal" class="button group">By C5 Modal</button>
+        <button id="C6_Modal" class="button group">By C6 Modal</button>
+        <button id="C7_Modal" class="button group">By C7 Modal</button>
         <button id="valence" class="button dimension">valence</button>
         <button id="arousal" class="button dimension">arousal</button>
         <button id="continuance" class="button dimension">continuance</button>
