@@ -4,7 +4,7 @@ var color = d3.scaleQuantize()
 
 file = "./final.csv"
 
-var margin = {top: 50, right: 300, bottom: 50, left: 300},
+var margin = {top: 50, right: 50, bottom: 50, left: 50},
     w = 1*(window.screen.width), //- margin.left - margin.right,
     h = 1*(window.screen.height); //+ margin.top - margin.bottom;
 
@@ -14,26 +14,26 @@ var centerScale = d3.scalePoint().padding(1).range([margin.left, w-margin.right]
 var textScale = d3.scalePoint().padding(1).range([0, w]);
 var forceStrength = 0.1;
 
-var svg = d3.select("#svg").append("svg")
-    .attr("width", w)
-    .attr("height", h)
-
-var simulation = d3.forceSimulation()
-    .force("collide",d3.forceCollide( function(d){
-        return d.r + 4 }).iterations(16) 
-    )
-    .force("charge", d3.forceManyBody())
-    .force("y", d3.forceY().y(h / 2))
-    .force("x", d3.forceX().x(w / 2))
-
 d3.csv(file, function(data){
+    var svg = d3.select("#svg_bubbles").append("svg")
+        .attr("width", w)
+        .attr("height", h)
+
+    var simulation = d3.forceSimulation()
+        .force("collide",d3.forceCollide( function(d){
+            return d.r + 4 }).iterations(16) 
+        )
+        .force("charge", d3.forceManyBody())
+        .force("y", d3.forceY().y(h / 2))
+        .force("x", d3.forceX().x(w / 2))
+
     data.forEach(function(d){
         // d.r = d[Dimension]*2;
         d.r = radius;
         d.x = w / 2;
         d.y = h / 2;
     })
-    
+
     var circles = svg.selectAll("circle")
         .data(data, function(d){ return d.ID ;});
 
@@ -75,7 +75,7 @@ d3.csv(file, function(data){
             .attr("cx", function(d){ return d.x; })
             .attr("cy", function(d){ return d.y; });
     }   
-    
+
     simulation
         .nodes(data)
         .on("tick", ticked);
