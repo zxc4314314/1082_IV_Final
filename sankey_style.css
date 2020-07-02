@@ -32,38 +32,31 @@ div#sankey_container {
 
 div#node_text_container {
  	position: absolute;
-  left: calc(50% + 200px);
-  width: 150px;
-  	/*top: 100px;
-  	margin-left: 1200px;
-
-  	padding: 10px;
-  	background-color: #577C8A;
-  	border-radius: 10px;
-  	
-  	width: 500px;*/
+  left: calc(50% + 220px);
+  width: 25%;
+  height: 240px;
+  top: 260px ;
+  margin: 10px;
+  padding: 10px;
+  background-color: #577C8A;
+  border-radius: 10px;
 	
 	font-family: "微軟正黑體", Consolas;
-	font-size: 24px; 
+	font-size: 16px; 
 }
 
 div#link_text_container {
-	 position: absolute;
-  left: calc(50% + 350px);
-  width: 150px;
-
-  	/*top: 450px;
-  	margin-left: 1200px;
-  	
-  	padding: 10px;
-  	background-color: #577C8A;
-  	border-radius: 10px;
-
-  	width: 500px;*/
-
-   
+	position: absolute;
+  left: calc(50% + 220px);
+  width: 25%;
+  height: 240px;
+  top: 0px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #577C8A;
+  border-radius: 10px;
 	font-family: "微軟正黑體", Consolas;
-	font-size: 24px;
+	font-size: 16px;
 }
 
 
@@ -71,5 +64,5 @@ div#link_text_container {
 div#sankey_diagram {
   position: absolute;
   left: 200px;
-    width: 50%;
+  width: 50%;
 }

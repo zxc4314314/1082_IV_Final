@@ -265,7 +265,7 @@ d3.csv("clusterDataPath.csv", function(error, clusterData) {
         ******************/
         function showLinkWords(d) {
             console.log()
-            var linkWordsDiv = document.getElementById('link_text_container').innerText = 'Emotional words in link: ' + d.source.name + ' to ' + d.target.name + '\n' + d.words+ '\n';
+            var linkWordsDiv = document.getElementById('link_text_container').innerText = 'Emotional words in link: ' + d.source.name + ' to ' + d.target.name + '\n' + '\n' + d.words+ '\n';
         }
 
         function showNodeWords(d, i) {
@@ -273,7 +273,7 @@ d3.csv("clusterDataPath.csv", function(error, clusterData) {
             //console.log(nodeWordsData[0]["subset"]);
             for (var i = nodeWordsData.length - 1; i >= 0; i--) {
                 if (nodeWordsData[i]["subset"] == d.name) {
-                    var linkWordsDiv = document.getElementById('node_text_container').innerText = 'Emotional words in node: ' + d.name + '\n' + nodeWordsData[i]["words"] + '\n';
+                    var linkWordsDiv = document.getElementById('node_text_container').innerText = 'Emotional words in node: ' + d.name + '\n' + '\n' + nodeWordsData[i]["words"] + '\n';
                 }
             }
         }
