@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="./css/index.css">
-    
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-    <link rel="stylesheet" type="text/css" href="./sankey_style.css">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="./sankey.js"></script>
-
-</head>
-<body data-hijacking="on" data-animation="none">
-    <!-- <body> -->
-    <section class="cd-section visible">
-        <div>
-            <h1 class="title">情緒詞：關聯與分群</h1>
-        </div>
-    </section>
-
-    <section class="cd-section">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="./css/index.css">
+        
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+        <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+        <link rel="stylesheet" type="text/css" href="./sankey_style.css">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="./sankey.js"></script>
+    </head>
+    <!-- <body data-hijacking="on" data-animation="none"> -->
+    <body>
+        <section class="cd-section visible">
             <div>
-                <div id="sankey_container">
+                <h1 class="title">情緒詞：關聯與分群</h1>
+            </div>
+        </section>
+        <section class="cd-section">
+            <div id="sankey_container">
+                <div style="width:70%; float: left;">
                     <div id="sankey_diagram">
                         <script type="text/javascript" src="./sankey_script.js"></script>
                     </div>
                 </div>
-    </section>
+                <div style="width:30%; float: right">
+                    
+                    <div id="node_text_container">
+                        <p>這到底</p>
+                        Emotional words in node:
+                    </div>
 
-    <nav>
-        <ul class="cd-vertical-nav">
-            <li><a href="#0" class="cd-prev inactive">Next</a></li>
-            <li><a href="#0" class="cd-next">Prev</a></li>
-        </ul>
-    </nav> <!-- .cd-vertical-nav -->
-    <script src="js/jquery-2.1.4.js"></script>
-    <script src="js/velocity.min.js"></script>
-    <script src="js/velocity.ui.min.js"></script>
-    <script src="js/main.js"></script> <!-- Resource jQuery -->
-</body>
-</html>
+                    <div id="link_text_container">
+                        <p>三小</p>
+                        Emotional words in link:
+                    </div>
+                </div>
+            </div>
+        </section>
+        <nav>
+            <ul class="cd-vertical-nav">
+                <li><a href="#0" class="cd-prev inactive">Next</a></li>
+                <li><a href="#0" class="cd-next">Prev</a></li>
+            </ul>
+            </nav> <!-- .cd-vertical-nav -->
+            <script src="js/jquery-2.1.4.js"></script>
+            <script src="js/velocity.min.js"></script>
+            <script src="js/velocity.ui.min.js"></script>
+            <script src="js/main.js"></script> <!-- Resource jQuery -->
+        </body>
+    </html>
