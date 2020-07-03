@@ -40,5 +40,9 @@
     padding: 50px;
     position: relative;
     top: 100px;
+    text-align: center;
 }
+
+.dimension {
+    text-align: center;
 }
