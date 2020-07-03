@@ -46,3 +46,8 @@
 .dimension {
     text-align: center;
 }
+
+.modal {
+    margin: 0px auto;
+    text-align: center;
+}
