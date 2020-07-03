@@ -11,7 +11,7 @@ var margin = {top: 50, right: 100, bottom: 50, left: 100},
 var radius = 8;
 // var color = d3.scaleOrdinal(d3.schemeCategory20);
 var centerScale = d3.scalePoint().padding(1).range([margin.left, w-margin.right]);
-var textScale = d3.scalePoint().padding(1).range([0, w]);
+var textScale = d3.scalePoint().padding(1).range([-margin.left, w+margin.right]);
 var forceStrength = 0.075;
 
 d3.csv(file, function(data){
@@ -134,11 +134,12 @@ d3.csv(file, function(data){
         console.log((scale(1)));
 
         titles.enter().append('text')
-            .attr('class', 'group_title')
             .merge(titles)
             .attr('x', function (d) { return scale(d); })
-            .attr('y', 40)
+            .attr('y', 150)
             .attr('text-anchor', 'middle')
+            .attr('fill', "#66ffc2")
+            .attr('class', 'group_title')
             .text(function (d) { return  'Cluster' + d; });
 
         titles.exit().remove() 

@@ -1,5 +1,6 @@
 .group_title {
     font-size: 20px;
+
 }
 
 /* .button { */
@@ -29,4 +30,15 @@
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+}
+
+.switch {
+}
+
+.Dimension {
+    margin: 0px auto;
+    padding: 50px;
+    position: relative;
+    top: 100px;
+}
 }
