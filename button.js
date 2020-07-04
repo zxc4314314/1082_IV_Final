@@ -9,9 +9,9 @@ dropdownArray.forEach(item => {
     valueArray.push(item.textContent);
 });
 
-const closeDropdown = () => {
-    dropdown.classList.remove('open');
-}
+// const closeDropdown = () => {
+//     dropdown.classList.remove('open');
+// }
 
 inputField.addEventListener('input', () => {
     dropdown.classList.add('open');
@@ -43,7 +43,6 @@ dropdownArray.forEach(item => {
 
 inputField.addEventListener('focus', () => {
     inputField.placeholder = '選擇向度';
-    dropdown.classList.add('open');
     dropdownArray.forEach(dropdown => {
         dropdown.classList.remove('closed');
     });
@@ -57,6 +56,7 @@ inputField.addEventListener('blur', () => {
 document.addEventListener('click', (evt) => {
     const isDropdown = dropdown.contains(evt.target);
     const isInput = inputField.contains(evt.target);
+    dropdown.classList.add('open');
     if (!isDropdown && !isInput) {
         dropdown.classList.remove('open');
     }
