@@ -42,7 +42,7 @@ dropdownArray.forEach(item => {
 })
 
 inputField.addEventListener('focus', () => {
-    inputField.placeholder = 'Type to filter';
+    inputField.placeholder = '選擇向度';
     dropdown.classList.add('open');
     dropdownArray.forEach(dropdown => {
         dropdown.classList.remove('closed');
@@ -50,7 +50,7 @@ inputField.addEventListener('focus', () => {
 });
 
 inputField.addEventListener('blur', () => {
-    inputField.placeholder = 'Select state';
+    inputField.placeholder = '選擇向度';
     dropdown.classList.remove('open');
 });
 

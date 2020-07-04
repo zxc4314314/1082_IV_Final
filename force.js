@@ -4,9 +4,9 @@ var color = d3.scaleQuantize()
 
 file = "./final.csv"
 
-var margin = {top: 50, right: 100, bottom: 50, left: 100},
+var margin = {top: 100, right: 100, bottom: 50, left: 100},
     w = 1*(window.screen.width), //- margin.left - margin.right,
-    h = 1*(window.screen.height); //+ margin.top - margin.bottom;
+    h = 1*(window.screen.height) -  margin.top - margin.bottom;
 
 var radius = 8;
 // var color = d3.scaleOrdinal(d3.schemeCategory20);
@@ -113,7 +113,7 @@ d3.csv(file, function(data){
             .style("opacity", 0.8)
             .style("fill", function(d){ return color(d[Group]);})
         
-        showTitles(Group, textScale);
+        // showTitles(Group, textScale);
 
         // @v4 Reset the 'x' force to draw the bubbles to their year centers
         simulation.force('x', d3.forceX().strength(forceStrength).x(function(d){ 
