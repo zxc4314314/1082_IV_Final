@@ -2,7 +2,7 @@
   position: absolute;
   left: 50%;
   /* width: 480px; */
-  margin: 0 0 0 -240px;
+  margin: 60px 0 60px -240px;
   display: flex;
   /* padding: 0 1px; */
 }
@@ -83,33 +83,34 @@ form {
 }
 
 .chosen-value {
-    font-family: "Ek Mukta";
+    font-family: "微軟正黑體";
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 4px;
     height: 4rem;
     font-size: 1.1rem;
     padding: 1rem;
-    background-color: #fafcfd;
+    background-color: rgb(102, 255, 194);
     border: 3px solid transparent;
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
     text-align: center;
+    border-radius: 15px;
 }
 .chosen-value::-webkit-input-placeholder {
-    color: #333;
+    color: #DDD;
 }
 .chosen-value:hover {
-    background-color: #ff908b;
+    background-color: rgb(102, 255, 194);
     cursor: pointer;
 }
 .chosen-value:hover::-webkit-input-placeholder {
-    color: #333;
+    color: #DDD;
 }
 .chosen-value:focus, .chosen-value.open {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   outline: 0;
-  background-color: #ff908b;
+  background-color: rgb(102, 255, 194);
   color: #000;
 }
 .chosen-value:focus::-webkit-input-placeholder, .chosen-value.open::-webkit-input-placeholder {
@@ -124,6 +125,7 @@ form {
   max-height: 0;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
+  border-radius: 15px;
 }
 .value-list.open {
   max-height: 320px;
@@ -145,7 +147,8 @@ form {
   opacity: 1;
 }
 .value-list li:hover {
-  background-color: #ff908b;
+  background-color: rgb(102, 255, 194);
+  color: black;
 }
 .value-list li.closed {
   max-height: 0;

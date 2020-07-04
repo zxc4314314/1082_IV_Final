@@ -22,14 +22,15 @@
 .tooltip {
     position: absolute;
     text-align: center;
-    width: 150px;
+    width: 140px;
     /*height: 28px;         */
-    padding: 2px;
-    font: 12px sans-serif;
+    padding: 5px;
+    font: 16px 微軟正黑體;
     background: lightgrey;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+    color: #000;
 }
 
 .switch {
@@ -50,4 +51,8 @@
 .modal {
     margin: 0px auto;
     text-align: center;
+}
+
+circle :hover {
+    fill: white;
 }
