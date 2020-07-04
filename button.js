@@ -61,3 +61,7 @@ document.addEventListener('click', (evt) => {
         dropdown.classList.remove('open');
     }
 });
+
+function modal_select_color() {
+    $(".switch__indicator").css("opacity", 1);
+}
