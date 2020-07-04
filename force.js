@@ -55,7 +55,8 @@ d3.csv(file, function(data){
             .on("drag", dragged)
             .on("end", dragended))
         .on("mouseover", function(d) {
-            d3.select(this).style("opacity", 1);
+            temp = this.style.fill;
+            d3.select(this).style("fill", "#fff");
             div.transition()
                 .duration(200)
                 .style("opacity", 1);
@@ -64,7 +65,8 @@ d3.csv(file, function(data){
                 .style("top", (d3.event.pageY - 28) + "px");
         })
         .on("mouseout", function(d) {
-            d3.select(this).style("opacity", 0.8);
+            // console.log(this.style.fill);
+            d3.select(this).style("fill", temp);
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
@@ -110,7 +112,7 @@ d3.csv(file, function(data){
         d3.selectAll("circle")
             .transition()
             .duration(1000)
-            .style("opacity", 0.8)
+            // .style("opacity", 0.8)
             .style("fill", function(d){ return color(d[Group]);})
         
         // showTitles(Group, textScale);
