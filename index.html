@@ -26,13 +26,14 @@
                 本研究蒐集了台灣地區華人情緒與相關心理生理資料庫中的情緒描述詞資料，共218個情緒詞與其六個向度（正負向性、激發水準、持續時間、自主程度、出現頻率及典型性）的實驗評分結果，在此頁面中以力圖及桑基圖的視覺化方式呈現出資料在分群演算後的結果。</p>
             </div>
         </section>
-        <section class="force">
+        <section>
             <div class="article">                
                 <p>
                 使用力圖 (force graph) 呈現分群資料，可在圖表中選擇分群數目以及不同向度結果，越大的節點 (node)表示該向度評分越高。向度資料由受試者對每個情緒詞的不同向度進行九點評分，並將所有受試者各項度的評分取平均數。受試者數量為353名，男女比為13比7，平均年齡21.54歲。
                 </p>
-            </div>
-            
+            </div>    
+        </section>
+        <section>
             <div onclick="modal_select_color()" class="switch">
                 <input name="switch" id="C5_Modal" class="group" type="radio" checked/>
                 <label for="C5_Modal" class="switch__label">C5 modal</label>
@@ -56,15 +57,15 @@
             </form>
 
             <div id="svg_bubbles"></div>
-
         </section>
 
-        <section class="sankey">
+        <section>
             <div class="article">                
                 <p>
                 使用桑基圖（sankey diagram）呈現分群資料。每一個直欄表示一組分群結果，由左而右分別是分成五、六、七群三組。一直欄上的每個節點（node），表示該組分群結果中的各個子群。兩個節點間的路徑（link）表示有多少情緒詞在兩個子群中是一致的，路徑寬度越寬表示一致的情緒詞越多，因此可以推廣到整體路徑越平行，表示不同組分群結果較穩定，反之越多交叉，不同組分群結果較不穩定。
                 </p>
-            </div>
+            </section>
+        <section>
             <!-- <section class="cd-section"> -->
             <div id="sankey_container">
                 <div style="width:50%; float: left;">
