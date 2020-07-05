@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title></title>
         <link rel="stylesheet" href="./css/index.css">
-
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
         <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
@@ -16,22 +15,23 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="./sankey.js"></script>
     </head>
-    <!-- <body data-hijacking="on" data-animation="none"> -->
     <body>
-        <!-- <section class="cd-section visible"> -->
+    <div class="wrapper">
         <section class="first">
+            
+            <h1 class="title">情緒詞：關聯與分群<br></h1>
             <div class="article">
-                <h1 class="title">情緒詞：關聯與分群</h1>
                 <p>
-                本研究蒐集了台灣地區華人情緒與相關心理生理資料庫中的情緒描述詞資料，共218個情緒詞與其六個向度（正負向性、激發水準、持續時間、自主程度、出現頻率及典型性）的實驗評分結果，在此頁面中以力圖及桑基圖的視覺化方式呈現出資料在分群演算後的結果。</p>
+                    <a href="http://www.airitilibrary.com/Publication/alDetailedMesh?docid=10139656-201312-201312310030-201312310030-493-523">本研究</a>蒐集了台灣地區華人情緒與相關心理生理資料庫中的情緒描述詞資料，共218個情緒詞與其六個向度（正負向性、激發水準、持續時間、自主程度、出現頻率及典型性）的實驗評分結果，在此頁面中以力圖及桑基圖的視覺化方式呈現出資料在分群演算後的結果。
+                </p>
             </div>
         </section>
         <section>
-            <div class="article">                
+            <div class="article">
                 <p>
-                使用力圖 (force graph) 呈現分群資料，可在圖表中選擇分群數目以及不同向度結果，越大的節點 (node)表示該向度評分越高。向度資料由受試者對每個情緒詞的不同向度進行九點評分，並將所有受試者各項度的評分取平均數。受試者數量為353名，男女比為13比7，平均年齡21.54歲。
+                    使用力圖 (force graph) 呈現分群資料，可在圖表中選擇分群數目以及不同向度結果，越大的節點 (node)表示該向度評分越高。向度資料由受試者對每個情緒詞的不同向度進行九點評分，並將所有受試者各項度的評分取平均數。受試者數量為353名，男女比為13比7，平均年齡21.54歲。
                 </p>
-            </div>    
+            </div>
         </section>
         <section>
             <div onclick="modal_select_color()" class="switch">
@@ -43,7 +43,6 @@
                 <label for="C7_Modal" class="switch__label" >C7 modal</label>
                 <div class="switch__indicator" /></div>
             </div>
-
             <form class="Dimension">
                 <input class="chosen-value" type="text" value="" placeholder="選擇向度">
                 <ul class="value-list">
@@ -55,16 +54,16 @@
                     <li id="typicality" class="dimension">典型的程度 (Typicality)</li>
                 </ul>
             </form>
-
             <div id="svg_bubbles"></div>
         </section>
-
         <section>
-            <div class="article">                
+            <div class="article">
                 <p>
-                使用桑基圖（sankey diagram）呈現分群資料。每一個直欄表示一組分群結果，由左而右分別是分成五、六、七群三組。一直欄上的每個節點（node），表示該組分群結果中的各個子群。兩個節點間的路徑（link）表示有多少情緒詞在兩個子群中是一致的，路徑寬度越寬表示一致的情緒詞越多，因此可以推廣到整體路徑越平行，表示不同組分群結果較穩定，反之越多交叉，不同組分群結果較不穩定。
+                    使用桑基圖（sankey diagram）呈現分群資料。每一個直欄表示一組分群結果，由左而右分別是分成五、六、七群三組。一直欄上的每個節點（node），表示該組分群結果中的各個子群。兩個節點間的路徑（link）表示有多少情緒詞在兩個子群中是一致的，路徑寬度越寬表示一致的情緒詞越多，因此可以推廣到整體路徑越平行，表示不同組分群結果較穩定，反之越多交叉，不同組分群結果較不穩定。
                 </p>
-            </section>
+            </div>
+        </section>
+        
         <section>
             <!-- <section class="cd-section"> -->
             <div id="sankey_container">
@@ -76,28 +75,40 @@
                 </div>
                 <div style="width:15%; float: left">
                     <div id="node_text_container">
-                        Emotional words in node:
+                        節點中的情緒詞：
                     </div>
                 </div>
                 <div style="width:15%; float: left">
                     <div id="link_text_container">
-                        Emotional words in link:
+                        流向中的情緒詞：
                     </div>
                 </div>
             </div>
-            </section>
-            <nav>
-                <ul class="cd-vertical-nav">
-                    <li><a href="#0" class="cd-prev inactive">Next</a></li>
-                    <li><a href="#0" class="cd-next">Prev</a></li>
-                </ul>
-            </nav> <!-- .cd-vertical-nav -->
-            <!-- <script src="js/jquery-2.1.4.js"></script> -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="js/velocity.min.js"></script>
-            <script src="js/velocity.ui.min.js"></script>
-            <script src="js/main.js"></script> <!-- Resource jQuery -->
-            <script src="./force.js"></script>
-            <script src="./button.js"></script>
+            
+            
+        </section>
+
+        <section class="credit">
+            <div class="compact">
+                <h2>NCCU大學報資訊視覺化專題</h2>
+                <p>文字編輯 | 李芸、呂心喻、黃雪瀅、朱姰霖</p>
+                <p>首圖攝影 | 呂心喻&nbsp&nbsp&nbsp&nbsp&nbsp尾圖攝影 | 黃雪瀅</p>
+                <p>圖表製作 | 廖凡媗、羅倩如、胡鈞彥、吳秋潔、金藜軒</p>
+                <p>網頁製作 | 陳品晴、林姿彤、李筱涵</p>
+            </div>
+            <div class="share">
+                <h2>聯絡我們</h2>
+                <a href="https://www.facebook.com/unewsonline/" class="fab fa-facebook" style="color:rgb(65, 65, 65)"></a>
+                <p>© 政治大學 新聞學系 / 資訊科學系</p>
+                <p class="date">發佈日期：2020/05/22</p>
+            </div>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/velocity.min.js"></script>
+        <script src="js/velocity.ui.min.js"></script>
+        <script src="js/main.js"></script> <!-- Resource jQuery -->
+        <script src="./force.js"></script>
+        <script src="./button.js"></script>
+    </div>
     </body>
 </html>
