@@ -43,6 +43,7 @@ div#node_text_container {
   border: 3px solid #66ffc2;
 	
 	font-family: "微軟正黑體", Consolas;
+  line-height: 20px;
 	font-size: 16px; 
 }
 
@@ -59,6 +60,7 @@ div#link_text_container {
   border: 3px solid #66ffc2;
 	font-family: "微軟正黑體", Consolas;
 	font-size: 16px;
+  line-height: 20px;
 }
 
 
